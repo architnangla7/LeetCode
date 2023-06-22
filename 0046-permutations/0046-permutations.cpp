@@ -1,5 +1,7 @@
 class Solution {
 public:
+    /*Approach 1
+    
     void permutation(vector<int> &ds,vector<int> &nums,vector<vector<int>> &ans, int freq[])
     {
         if(ds.size()==nums.size())
@@ -17,8 +19,25 @@ public:
             ds.pop_back();
         }
     }
+    }*/
+    
+    void permutation(int index,vector<int> &nums,vector<vector<int>> &ans)
+    {
+        if(index==nums.size())
+        {
+            ans.push_back(nums);
+            return;
+        }
+        for(int i=index;i<nums.size();i++)
+        {
+            swap(nums[index],nums[i]);
+            permutation(index+1,nums,ans);
+            swap(nums[index],nums[i]);
+        }
     }
     vector<vector<int>> permute(vector<int>& nums) {
+        /*Approach 1
+        
         vector<vector<int>> ans;
         vector<int> ds;
         int freq[nums.size()];
@@ -27,6 +46,11 @@ public:
             freq[i]=0;
         }
         permutation(ds,nums,ans,freq);
+        return ans;
+        */
+        
+        vector<vector<int>> ans;
+        permutation(0,nums,ans);
         return ans;
     }
 };
