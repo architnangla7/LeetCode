@@ -5,6 +5,8 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
+    //Using DFS
+    /*
     bool dfs(int node,vector<int> adj[],int vis[],int pathvis[])
     {
         vis[node]=1;
@@ -21,7 +23,10 @@ class Solution {
         pathvis[node]=0;
         return false;
     }
+    */
     bool isCyclic(int V, vector<int> adj[]) {
+        //Using DFS
+        /*
         int vis[V]={0};
         int pathvis[V]={0};
         for(int i=0;i<V;i++){
@@ -31,6 +36,35 @@ class Solution {
             }
         }
         return false;
+        */
+        
+        int indegree[V]={0};
+	    for(int i=0;i<V;i++){
+	        for(auto it:adj[i]){
+	            indegree[it]++;
+	        }
+	    }
+	    queue<int> q;
+	    for(int i=0;i<V;i++)
+	    {
+	        if(indegree[i]==0){
+	            q.push(i);
+	        }
+	    }
+	    int count=0;
+	    while(!q.empty()){
+	        int node=q.front();
+	        q.pop();
+	        count++;
+	        
+	        for(auto it:adj[node]){
+	            indegree[it]--;
+	            if(indegree[it]==0)
+	            q.push(it);
+	        }
+	    }
+	    if(count==V) return false;
+	    return true;
     }
 };
 
