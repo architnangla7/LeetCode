@@ -121,3 +121,5 @@ int minValue(Node* root) {
     }
     return current->data;
 }
+
+// for maximum element we will go to right instead of going to left
