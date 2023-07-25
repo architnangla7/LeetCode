@@ -10,8 +10,17 @@
  */
 class Solution {
 public:
+    //Recursive Way
+    ListNode* reverse(ListNode* head){
+        if(head->next==NULL) return head;
+        ListNode* newNode=reverse(head->next);
+        head->next->next=head;
+        head->next=NULL;
+        return newNode;
+    }
     ListNode* reverseList(ListNode* head) {
         //Iterative Way
+        /*
         ListNode* newHead=NULL;
         while(head!=NULL){
             ListNode* next=head->next;
@@ -20,5 +29,10 @@ public:
             head=next;
         }
         return newHead;
+        */
+        
+        //Recursive Way
+        if(head==NULL) return NULL;
+        return reverse(head);
     }
 };
